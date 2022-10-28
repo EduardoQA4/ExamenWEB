@@ -30,23 +30,23 @@ public class PeliculaController {
     @GetMapping("/peliculas")
     public String index(Model model) {
         List<Pelicula> listaPeliculas = peliculaService.getAllPelicula();
-        model.addAttribute("titulo", "Tabla Personas");
-        model.addAttribute("personas", listaPeliculas);
-        return "personas";
+        model.addAttribute("titulo", "Tabla Peliculas");
+        model.addAttribute("peliculas", listaPeliculas);
+        return "peliculas";
     }
     
     @GetMapping("/peliculaN")
     public String crearPelicula(Model model) {
-        List<Sala> listaPaises = salaService.listSala();
-        model.addAttribute("persona", new Pelicula());
-        model.addAttribute("paises", listaPaises);
+        List<Sala> listaSalas = salaService.listSala();
+        model.addAttribute("pelicula", new Pelicula());
+        model.addAttribute("salas", listaSalas);
         return "crear";
     }
     
     @PostMapping("/save")
-    public String guardarPersona(@ModelAttribute Pelicula pelicula) {
+    public String guardarPelicula(@ModelAttribute Pelicula pelicula) {
         peliculaService.savePelicula(pelicula);
-        return "redirect:/persona";
+        return "redirect:/peliculas";
     }
     
     @GetMapping("/editPelicula/{id}")
@@ -59,8 +59,8 @@ public class PeliculaController {
     }
     
     @GetMapping("/delete/{id}")
-    public String eliminarPelicula(@PathVariable("id") Long idPersona) {
-        peliculaService.delete(idPersona);
-        return "redirect:/persona";
+    public String eliminarPelicula(@PathVariable("id") Long idPelicula) {
+        peliculaService.delete(idPelicula);
+        return "redirect:/peliculas";
     }
 }
